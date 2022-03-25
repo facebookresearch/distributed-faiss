@@ -1,0 +1,6 @@
+{
+	"index_storage_dir": "/tmp/save",
+	"dim": "1024",
+	"factory_type": "IVF{centroids},SQ8",
+	"centroids": "1000"
+}
