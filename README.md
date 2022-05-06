@@ -44,7 +44,7 @@ Example:
 ```bash
 python scripts/server_launcher.py \
     --log-dir /logs/distr-faiss/ \
-    --discovery-config /tmp/disover_config.txt \
+    --discovery-config /tmp/discover_config.txt \
     --save-dir $HOME/dfaiss_data \
     --num-servers 64 \
     --num-servers-per-node 32 \
@@ -53,7 +53,7 @@ python scripts/server_launcher.py \
     --base-port 12033 \
     --partition dev &
 ```
-Clients can now read `/tmp/disover_config.txt` to discover servers.
+Clients can now read `/tmp/discover_config.txt` to discover servers.
 
 Will launch a job running 64 servers in the background.
 To view logs (which are verbose but informative) run something like:
@@ -80,7 +80,7 @@ Each client process is supposed to work with all the server nodes and does all t
 ```python
 index_client = IndexClient(discovery_config)
 ```
-discovery_config is the path to the shared FS file which was used to start the set of servers and conatins all (host, port) info to connect to all of them.
+discovery_config is the path to the shared FS file which was used to start the set of servers and contains all (host, port) info to connect to all of them.
 
 ## Creating an index
 Each client & server nodes can work with multiple logical indexes (consider them as fully separate tables in an SQL database).
@@ -151,7 +151,7 @@ First launch 64 servers in the background
 ```bash
 python scripts/server_launcher.py \
     --log-dir /logs/distr-faiss/ \
-    --discovery-config /tmp/disover_config.txt \
+    --discovery-config /tmp/discover_config.txt \
     --save-dir $HOME/dfaiss_data \
     --num-servers 64 \
     --num-servers-per-node 32 \
@@ -164,7 +164,7 @@ Once you receive your allocation, load in the data with
 
 ```bash
 python scripts/load_data.py \
-    --discover /tmp/disover_config.txt \
+    --discover /tmp/discover_config.txt \
     --mmap $HOME/dfaiss_data/random_1000000000_768_fp16.mmap \
     --mmap-size 1000000000 \
     --dimension 768 \
