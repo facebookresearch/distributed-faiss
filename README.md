@@ -1,5 +1,5 @@
 # About
-Distributed faiss index service. A lightweight library that lets you work with FAISS indexes which don't fit into a single server memory. It follows a simple concept of a set of index server processes runing in a complete isolation from each other. All the coordination is done at the client side. This siplified many-vs-many client-to-server relationship architecture is flexible and is specifically designed for research projects vs more complicated solutions that aims mostly at production usage and transactionality support.
+Distributed faiss index service. A lightweight library that lets you work with FAISS indexes which don't fit into a single server memory. It follows a simple concept of a set of index server processes running in a complete isolation from each other. All the coordination is done at the client side. This simplified many-vs-many client-to-server relationship architecture is flexible and is specifically designed for research projects vs more complicated solutions that aims mostly at production usage and transactionality support.
 The data is sharded over several indexes on different servers in RAM. The search client aggregates results from different servers during retrieval. The service is model-independent and operates with supplied embeddings and metadatas.
 
 ### Features:
@@ -34,7 +34,7 @@ pytest tests
 # Usage
 ## Starting the index servers
 distributed-faiss consist of server and client parts which are supposed to be launched as separate services. 
-The set of server processes can be launched either by using its API or the provided lauch tool that uses [`submitit`](https://github.com/facebookincubator/submitit) library that works on clusters with SLURM cluster management and job scheduling system 
+The set of server processes can be launched either by using its API or the provided launch tool that uses [`submitit`](https://github.com/facebookincubator/submitit) library that works on clusters with SLURM cluster management and job scheduling system 
 
 
 
@@ -69,13 +69,13 @@ server = IndexServer(global_rank, index_storage_dir)
 server.start_blocking(port, load_index=True)
 ```
 
-The rank of the server node is needed for reading/writing its own part of the index from/to files. Index are dumped to files for persistent storage. The filesytem path convetion is that there is a shared folder for the entire logical index with each server node working on its own sub-folder inside it.
+The rank of the server node is needed for reading/writing its own part of the index from/to files. Index are dumped to files for persistent storage. The filesytem path convention is that there is a shared folder for the entire logical index with each server node working on its own sub-folder inside it.
 index_storage_dir is the default parameter to store indexes. Can be overrided for each logic index by specifing this attribute in the index configuration object (see client code examples below)
 When you start a server node on a specific machine and port, you need to write the host, port line to a specific file which can later be used to start a client.
 
 
 ## Client API
-Each client process is supposed to work with all the server nodes and does all the data balancing among them. Client processes can be run independently of each other and work with the same set of server nodes simulateously.
+Each client process is supposed to work with all the server nodes and does all the data balancing among them. Client processes can be run independently of each other and work with the same set of server nodes simultaneously.
 
 ```python
 index_client = IndexClient(discovery_config)
@@ -85,7 +85,7 @@ discovery_config is the path to the shared FS file which was used to start the s
 ## Creating an index
 Each client & server nodes can work with multiple logical indexes (consider them as fully separate tables in an SQL database).
 Each logical index can have its own faiss-related configuration, FS location and other parameters which affect its creation logic.
-Example of creating a simle IVF index:
+Example of creating a simple IVF index:
 
 ```python
 index_client = IndexClient(discovery_config)
