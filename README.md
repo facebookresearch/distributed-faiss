@@ -1,5 +1,5 @@
 # About
-Distributed faiss index service. A lightweight library that lets you work with FAISS indexes which don't fit into a single server memory. It follows a simple concept of a set of index server processes runing in a complete isolation from each other. All the coordination is done at the client side. This siplified many-vs-many client-to-server relationship architecture is flexible and is specifically designed for research projects vs more complicated solutions that aims mostly at production usage and transactionality support.
+Distributed faiss index service. A lightweight library that lets you work with FAISS indexes which don't fit into a single server memory. It follows a simple concept of a set of index server processes runing in a complete isolation from each other. All the coordination is done at the client side. This simplified many-vs-many client-to-server relationship architecture is flexible and is specifically designed for research projects vs more complicated solutions that aims mostly at production usage and transactionality support.
 The data is sharded over several indexes on different servers in RAM. The search client aggregates results from different servers during retrieval. The service is model-independent and operates with supplied embeddings and metadatas.
 
 ### Features:
