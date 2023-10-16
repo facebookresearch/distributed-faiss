@@ -317,6 +317,11 @@ class IndexServer:
         t = IndexTrainer(self)
         t.run()
 
+    def set_index_parameter(self, index_id: str, param: str, value: int):
+        logger.info(f"Setting param={param} with value={value}")
+        index = self._get_index(index_id)
+        return index.set_index_parameter(param, value)
+
     def search(
         self, index_id: str, query_batch: np.array, top_k: int, return_embeddings: bool
     ) -> Tuple:
