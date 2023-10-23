@@ -238,7 +238,10 @@ class Index:
             _thread.start_new_thread(self._add_buffer_to_idx, ())
 
     def set_index_parameter(self, param: str, value: int):
-        faiss.ParameterSpace().set_index_parameter(self.faiss_index, param, value)
+        with self.index_lock:
+            if self.faiss_index:
+                faiss.ParameterSpace().set_index_parameter(self.faiss_index, param, value)
+        
 
     # TODO: overload to get faiss indexes back, not metadata
     def search(
