@@ -241,6 +241,11 @@ class Index:
         with self.index_lock:
             if self.faiss_index:
                 faiss.ParameterSpace().set_index_parameter(self.faiss_index, param, value)
+
+    def set_index_parameters(self, str_param: int):
+        with self.index_lock:
+            if self.faiss_index:
+                faiss.ParameterSpace().set_index_parameters(self.faiss_index, str_param)
         
 
     # TODO: overload to get faiss indexes back, not metadata

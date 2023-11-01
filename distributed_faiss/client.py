@@ -201,6 +201,11 @@ class IndexClient:
         return self.pool.imap(
             lambda idx: idx.set_index_parameter(index_id, param, value), self.sub_indexes
         )
+    
+    def set_index_parameters(self, index_id: str, str_param: str):
+        return self.pool.imap(
+            lambda idx: idx.set_index_parameters(index_id, str_param), self.sub_indexes
+        )
 
     def search(
         self, query, topk: int, index_id: str, return_embeddings: bool = False

@@ -321,6 +321,11 @@ class IndexServer:
         logger.info(f"Setting param={param} with value={value}")
         index = self._get_index(index_id)
         return index.set_index_parameter(param, value)
+    
+    def set_index_parameters(self, index_id: str, str_param: int):
+        logger.info(f"Setting str_param={str_param}")
+        index = self._get_index(index_id)
+        return index.set_index_parameters(str_param)
 
     def search(
         self, index_id: str, query_batch: np.array, top_k: int, return_embeddings: bool
