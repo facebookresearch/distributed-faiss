@@ -237,6 +237,17 @@ class Index:
             # client's batches go to different server nodes without waiting for add_buffer_to_index completion
             _thread.start_new_thread(self._add_buffer_to_idx, ())
 
+    def set_index_parameter(self, param: str, value: int):
+        with self.index_lock:
+            if self.faiss_index:
+                faiss.ParameterSpace().set_index_parameter(self.faiss_index, param, value)
+
+    def set_index_parameters(self, str_param: int):
+        with self.index_lock:
+            if self.faiss_index:
+                faiss.ParameterSpace().set_index_parameters(self.faiss_index, str_param)
+        
+
     # TODO: overload to get faiss indexes back, not metadata
     def search(
         self, query_batch: np.array, top_k: int = 100, return_embeddings: bool = False

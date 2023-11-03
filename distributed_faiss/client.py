@@ -197,6 +197,16 @@ class IndexClient:
     def async_train(self, index_id: str):
         self.pool.map(lambda idx: idx.sync_train(index_id), self.sub_indexes)
 
+    def set_index_parameter(self, index_id: str, param: str, value: int):
+        return self.pool.imap(
+            lambda idx: idx.set_index_parameter(index_id, param, value), self.sub_indexes
+        )
+    
+    def set_index_parameters(self, index_id: str, str_param: str):
+        return self.pool.imap(
+            lambda idx: idx.set_index_parameters(index_id, str_param), self.sub_indexes
+        )
+
     def search(
         self, query, topk: int, index_id: str, return_embeddings: bool = False
     ) -> Tuple[np.ndarray, List]:
